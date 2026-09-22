@@ -486,7 +486,15 @@ function showPublicStats(){
   box.innerHTML=`<div class="card"><h2 style="margin-top:0">${esc(cat)} · ${esc(group)}</h2><div class="actions"><button class="btn light">Tabla de posiciones</button><button class="btn light">Tabla Fair Play</button><button class="btn light">Calendario de jornadas</button><button class="btn light">Resultados</button></div><p class="public-small" style="margin-top:15px">La información de esta categoría se mostrará aquí conforme la administración publique jornadas y resultados.</p></div>`;
 }
 
-function publicDocument(title,description,label){return head(title,description)+`<div class="doc-card"><h3>${label}</h3><p class="public-small">La administración de COFUTMEX publicará aquí la versión vigente. Los documentos oficiales serán visibles para consulta pública.</p><button class="btn light" disabled>Documento próximamente</button></div>`}
+function publicDocument(title,description,label){
+  const files={
+    'Hojas de Alineación':'hoja-alineacion.pdf',
+    'Fichas de Cambios':'ficha-cambios.pdf',
+    'Reglamento':'reglamento.pdf'
+  };
+  const file=files[title];
+  return head(title,description)+`<div class="doc-card"><h3>${label}</h3><p class="public-small">Documento oficial vigente de la Liga Premium COFUTMEX.</p><a class="btn light" href="${file}" target="_blank" rel="noopener">Abrir documento oficial</a></div>`
+}
 
 function dashboard(){return publicHome()}
 function adminDashboard(){return head('Panel Administrativo','Control exclusivo de Liga Premium COFUTMEX','<button class="btn" onclick="logout()">Cerrar sesión</button>')+`<div class="grid"><div class="admincard"><h2>👤 Registros</h2><p>Revisar y aprobar jugadores y cuerpo técnico.</p><div class="admin-actions"><button class="btn green" onclick="go('adminRegistros')">Revisar registros</button></div></div><div class="admincard"><h2>🏢 Clubes</h2><p>Administrar clubes participantes.</p><div class="admin-actions"><button class="btn green" onclick="go('adminClubes')">Gestionar clubes</button></div></div><div class="admincard"><h2>📊 Estadísticas</h2><p>Editar tablas, resultados y Fair Play.</p><div class="admin-actions"><button class="btn green" onclick="go('jornadas')">Abrir administración</button></div></div><div class="admincard"><h2>📄 Documentos y credenciales</h2><p>Revisar documentación y preparar credenciales.</p><div class="admin-actions"><button class="btn green" onclick="go('adminCredenciales')">🪪 Credenciales</button><button class="btn light" onclick="go('adminRegistros')">Ver registros</button></div></div></div>`}
